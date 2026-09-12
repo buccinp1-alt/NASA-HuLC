@@ -1,0 +1,79 @@
+{
+  "meta": {
+    "title": "Dust vs. the Signal — TCNJ HuLC",
+    "description": "TCNJ's NASA Human Lander Challenge capstone project: the project, the team, and past alumni."
+  },
+  "brand": {
+    "mark": "HL",
+    "line1": "TCNJ · SCHOOL OF ENGINEERING",
+    "line2": "HuLC Capstone"
+  },
+  "home": {
+    "eyebrow": "NASA HuLC · 2027 Cycle · Research Phase",
+    "headline_line1": "Dust vs.",
+    "headline_accent": "signal.",
+    "lede": "NASA's Human Lander Challenge is asking teams to solve problems in lunar surface communications equipment — a challenge that leans electrical engineering. The College of New Jersey's team is tackling it from a mechanical angle instead. We're in the research phase now, weighing whether the stronger fix is mitigating the lunar dust and regolith that fouls the hardware, or rethinking its geometry outright.",
+    "telemetry": [
+      { "k": "Competition", "v": "NASA HuLC" },
+      { "k": "Hosted by", "v": "NASA · NIA" },
+      { "k": "Challenge focus", "v": "Lunar Comms Equipment" },
+      { "k": "Season", "v": "2027 Cycle" },
+      { "k": "Status", "v": "Research / Problem Scoping", "status": true }
+    ],
+    "panel_hulc_title": "What is HuLC?",
+    "panel_hulc_body": "NASA's Human Lander Challenge is a national university design competition run with the National Institute of Aerospace, aimed at the technology NASA needs for its Artemis campaign to return humans to the Moon. Each year NASA opens a new focus area for teams to design against — this cycle (labeled \"2027\") centers on lunar surface communications equipment. Teams submit proposals, then present forward-phase designs to NASA reviewers.",
+    "panel_why_title": "Why it matters here",
+    "panel_why_body": "Beating other schools isn't just school pride — HuLC reviewers are NASA engineers, and a strong showing puts TCNJ's program on the map next to much larger aerospace schools. This year's theme leans electrical engineering; our team is deliberately answering it with a mechanical lens instead.",
+    "panel_why_list": [
+      "Update the telemetry strip once your direction is locked in",
+      "Swap the hero headline for your team's own framing",
+      "Everything on this page comes from one file you can edit in the CMS — no code required"
+    ]
+  },
+  "project": {
+    "artemis_title": "The Artemis campaign",
+    "artemis_body": "NASA's Artemis campaign is the agency's push to return astronauts to the Moon and build a sustainable presence there ahead of eventual Mars missions. Artemis II carried a crew around the Moon and back in 2026 — the first crewed lunar flight in over fifty years — and NASA is now moving hardware into place for Artemis III, which is planned to put astronauts back on the lunar surface. HuLC exists to pull outside engineering talent, like ours, onto the hardware problems that campaign still needs solved.",
+    "angle_title": "Research phase: choosing our angle",
+    "angle_body_1": "This year's HuLC theme (the \"2027\" cycle) centers on lunar surface communications equipment — an area that leans electrical engineering. Our team is approaching it from a mechanical lens instead, and right now we're still in the research phase: reviewing NASA's technical archives and our own program's past HuLC projects before committing to a direction.",
+    "angle_body_2": "Two candidate directions are on the table: mitigating the lunar regolith and dust that fouls comms hardware over time, or redesigning the equipment's geometry itself — its housing, mounts, or structure — so it holds up on the surface without relying on electronics to do the work.",
+    "spec_list": [
+      { "lbl": "Discipline", "val": "Mechanical Engineering" },
+      { "lbl": "Challenge cycle", "val": "2027 · Comms Equipment" },
+      { "lbl": "Candidate A", "val": "Regolith / Dust Mitigation" },
+      { "lbl": "Candidate B", "val": "Geometry Redesign" },
+      { "lbl": "Team size", "val": "[Add #]" }
+    ],
+    "phases": [
+      { "tag": "PHASE 0", "current": true, "title": "Research", "body": "Reviewing NASA's HuLC archives and our program's past two years of projects to scope the comms-equipment problem." },
+      { "tag": "PHASE 1", "current": false, "title": "Problem Selection", "body": "Narrowing between dust/regolith mitigation and a geometry-based redesign." },
+      { "tag": "PHASE 2", "current": false, "title": "Forward Review", "body": "Proposal and design package submitted for NASA / NIA review. [Update status]" },
+      { "tag": "PHASE 3", "current": false, "title": "Final Presentation", "body": "[Add details once scheduled — final forum, demo, or report date]" }
+    ],
+    "edit_note": "Once you commit to a direction, update the candidate cards above to a single answer and move the \"current\" marker to the next phase."
+  },
+  "team": {
+    "note": "Roles aren't locked in yet — this roster will fill in as the team settles who's doing what.",
+    "members": [
+      { "initials": "YN", "name": "Your Name Here", "year": "Class of 20XX", "bio": "One line on what you're working on — research, CAD, or proposal writing." },
+      { "initials": "TN", "name": "Teammate Name", "year": "Class of 20XX", "bio": "What they're working on." },
+      { "initials": "TN", "name": "Teammate Name", "year": "Class of 20XX", "bio": "What they're working on." },
+      { "initials": "FA", "name": "Faculty Advisor", "year": "Advisor", "bio": "Faculty advisor overseeing the capstone." }
+    ]
+  },
+  "alumni": {
+    "intro": "TCNJ students who worked on this project in previous years — the research and designs this season's team builds on.",
+    "members": [
+      { "initials": "AL", "name": "Alum Name", "year": "Class of 20XX", "bio": "Their role on the project, and where they are now — grad school, industry, etc.", "now": "[Company/Program]" },
+      { "initials": "AL", "name": "Alum Name", "year": "Class of 20XX", "bio": "Their role on the project, and where they are now.", "now": "[Company/Program]" },
+      { "initials": "AL", "name": "Alum Name", "year": "Class of 20XX", "bio": "Their role on the project, and where they are now.", "now": "[Company/Program]" }
+    ]
+  },
+  "footer": {
+    "org": "TCNJ Human Lander Challenge Team · School of Engineering",
+    "links": [
+      { "label": "HuLC Official Site", "href": "https://hulc.nianet.org/" },
+      { "label": "Contact", "href": "#" },
+      { "label": "Instagram", "href": "#" }
+    ]
+  }
+}
