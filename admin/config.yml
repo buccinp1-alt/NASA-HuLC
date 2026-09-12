@@ -1,0 +1,126 @@
+backend:
+  name: github
+  repo: buccinp1-alt/NASA-HuLC
+  branch: main
+  base_url: https://api.netlify.com
+  auth_endpoint: auth
+
+# Where uploaded images (team photos, alumni photos, etc.) get stored and served from
+media_folder: "images/uploads"
+public_folder: "/images/uploads"
+
+# Everything below edits the single content/site.json file that the site reads.
+# No new pages or fields will appear on the live site until index.html is updated
+# to use them — this form just controls what's already wired up.
+collections:
+  - name: "site"
+    label: "Site Content"
+    files:
+      - file: "content/site.json"
+        label: "Whole Site"
+        name: "site"
+        fields:
+          - label: "Page Info"
+            name: "meta"
+            widget: "object"
+            fields:
+              - { label: "Browser Tab Title", name: "title", widget: "string" }
+              - { label: "Description", name: "description", widget: "text" }
+
+          - label: "Brand / Header"
+            name: "brand"
+            widget: "object"
+            fields:
+              - { label: "Badge Initials", name: "mark", widget: "string" }
+              - { label: "Small Line (top)", name: "line1", widget: "string" }
+              - { label: "Bold Line (bottom)", name: "line2", widget: "string" }
+
+          - label: "Home Page"
+            name: "home"
+            widget: "object"
+            fields:
+              - { label: "Eyebrow (small text above headline)", name: "eyebrow", widget: "string" }
+              - { label: "Headline — line 1", name: "headline_line1", widget: "string" }
+              - { label: "Headline — accent word (colored)", name: "headline_accent", widget: "string" }
+              - { label: "Lede paragraph", name: "lede", widget: "text" }
+              - label: "Telemetry strip (the stat row)"
+                name: "telemetry"
+                widget: "list"
+                fields:
+                  - { label: "Label", name: "k", widget: "string" }
+                  - { label: "Value", name: "v", widget: "string" }
+                  - { label: "Highlight as status (orange text)", name: "status", widget: "boolean", required: false, default: false }
+              - { label: "\"What is HuLC\" panel title", name: "panel_hulc_title", widget: "string" }
+              - { label: "\"What is HuLC\" panel body", name: "panel_hulc_body", widget: "text" }
+              - { label: "\"Why it matters\" panel title", name: "panel_why_title", widget: "string" }
+              - { label: "\"Why it matters\" panel body", name: "panel_why_body", widget: "text" }
+              - label: "\"Why it matters\" bullet list"
+                name: "panel_why_list"
+                widget: "list"
+                field: { label: "Item", name: "item", widget: "string" }
+
+          - label: "Project Page"
+            name: "project"
+            widget: "object"
+            fields:
+              - { label: "Artemis panel title", name: "artemis_title", widget: "string" }
+              - { label: "Artemis panel body", name: "artemis_body", widget: "text" }
+              - { label: "Angle panel title", name: "angle_title", widget: "string" }
+              - { label: "Angle paragraph 1", name: "angle_body_1", widget: "text" }
+              - { label: "Angle paragraph 2", name: "angle_body_2", widget: "text" }
+              - label: "Spec list (facts strip)"
+                name: "spec_list"
+                widget: "list"
+                fields:
+                  - { label: "Label", name: "lbl", widget: "string" }
+                  - { label: "Value", name: "val", widget: "string" }
+              - label: "Phase track"
+                name: "phases"
+                widget: "list"
+                fields:
+                  - { label: "Tag (e.g. PHASE 0)", name: "tag", widget: "string" }
+                  - { label: "Is this the current phase?", name: "current", widget: "boolean", default: false }
+                  - { label: "Title", name: "title", widget: "string" }
+                  - { label: "Body", name: "body", widget: "text" }
+              - { label: "Edit note", name: "edit_note", widget: "text" }
+
+          - label: "Team Page"
+            name: "team"
+            widget: "object"
+            fields:
+              - { label: "Note above the roster", name: "note", widget: "text" }
+              - label: "Team members"
+                name: "members"
+                widget: "list"
+                fields:
+                  - { label: "Initials (for the avatar circle)", name: "initials", widget: "string" }
+                  - { label: "Name", name: "name", widget: "string" }
+                  - { label: "Class year", name: "year", widget: "string" }
+                  - { label: "One-line bio", name: "bio", widget: "text" }
+
+          - label: "Alumni Page"
+            name: "alumni"
+            widget: "object"
+            fields:
+              - { label: "Intro paragraph", name: "intro", widget: "text" }
+              - label: "Alumni"
+                name: "members"
+                widget: "list"
+                fields:
+                  - { label: "Initials", name: "initials", widget: "string" }
+                  - { label: "Name", name: "name", widget: "string" }
+                  - { label: "Class year", name: "year", widget: "string" }
+                  - { label: "One-line bio", name: "bio", widget: "text" }
+                  - { label: "Now at (company/program)", name: "now", widget: "string" }
+
+          - label: "Footer"
+            name: "footer"
+            widget: "object"
+            fields:
+              - { label: "Org line", name: "org", widget: "string" }
+              - label: "Links"
+                name: "links"
+                widget: "list"
+                fields:
+                  - { label: "Label", name: "label", widget: "string" }
+                  - { label: "URL", name: "href", widget: "string" }
