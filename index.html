@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dust vs. the Signal — TCNJ HuLC</title>
+<meta name="description" content="TCNJ's NASA Human Lander Challenge capstone project: the project, the team, and past alumni.">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800;900&family=Public+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+  :root{
+    --bg: #f2efe6;
+    --surface: #ffffff;
+    --surface-2: #e9e3d3;
+    --text: #1a2032;
+    --text-muted: #5c6478;
+    --accent: #c8590d;
+    --accent-ink: #ffffff;
+    --accent-2: #1f6e82;
+    --border: #d9d2bd;
+    --grid-line: rgba(26,32,50,0.06);
+    --shadow: 0 20px 50px -25px rgba(26,32,50,0.35);
+    --focus: #1f6e82;
+    --horizon: #dcd5c2;
+    --horizon-line: #b8ae94;
+    --moon-display: none;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg: #090d18;
+      --surface: #121a2e;
+      --surface-2: #182444;
+      --text: #edf0f8;
+      --text-muted: #97a1ba;
+      --accent: #f4832a;
+      --accent-ink: #171008;
+      --accent-2: #6fd7ea;
+      --border: #29365a;
+      --grid-line: rgba(255,255,255,0.05);
+      --shadow: 0 20px 60px -20px rgba(0,0,0,0.6);
+      --focus: #6fd7ea;
+      --horizon: #131c34;
+      --horizon-line: #33456f;
+      --moon-display: block;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg: #090d18;
+    --surface: #121a2e;
+    --surface-2: #182444;
+    --text: #edf0f8;
+    --text-muted: #97a1ba;
+    --accent: #f4832a;
+    --accent-ink: #171008;
+    --accent-2: #6fd7ea;
+    --border: #29365a;
+    --grid-line: rgba(255,255,255,0.05);
+    --shadow: 0 20px 60px -20px rgba(0,0,0,0.6);
+    --focus: #6fd7ea;
+    --horizon: #131c34;
+    --horizon-line: #33456f;
+    --moon-display: block;
+  }
+
+  *{ box-sizing: border-box; }
+  body{
+    margin:0;
+    color: var(--text);
+    font-family: "Public Sans", ui-sans-serif, system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  img{ max-width: 100%; }
+  h1,h2,h3,.display{
+    font-family: "Big Shoulders Display", "Arial Narrow", sans-serif;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.01em;
+    text-wrap: balance;
+    margin: 0;
+  }
+  .mono{ font-family: "JetBrains Mono", ui-monospace, "Courier New", monospace; }
+  a{ color: inherit; }
+  button{ font-family: inherit; }
+
+  /* ---------- backgrounds ---------- */
+  .site-bg{
+    position: fixed; inset: 0; z-index: -4;
+    background:
+      linear-gradient(var(--grid-line) 1px, transparent 1px) 0 0/48px 48px,
+      linear-gradient(90deg, var(--grid-line) 1px, transparent 1px) 0 0/48px 48px,
+      var(--bg);
+  }
+  .moon-bg{
+    display: var(--moon-display);
+    position: fixed; inset: 0; z-index: -3; overflow: hidden; pointer-events: none;
+    background: linear-gradient(180deg, var(--bg) 0%, var(--bg) 60%, color-mix(in srgb, var(--bg) 75%, black) 100%);
+  }
+  .moon-glow{
+    position:absolute; top:-20%; right:-15%; width:70vmax; height:70vmax; border-radius:50%;
+    background: radial-gradient(circle at 42% 42%, color-mix(in srgb, var(--accent-2) 22%, transparent), transparent 68%);
+  }
+  .moon-horizon{
+    position:absolute; left:0; right:0; bottom:0; width:100%; height:34vh; min-height:220px;
+    will-change: transform;
+  }
+  .moon-horizon svg{ width:100%; height:100%; display:block; }
+  #starfield{ position: fixed; inset: 0; z-index: -3; opacity: 0.55; }
+
+  header.topbar{
+    position: sticky; top: 0; z-index: 20;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 16px;
+    padding: 14px clamp(16px, 4vw, 40px);
+    background: color-mix(in srgb, var(--bg) 78%, transparent);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+  }
+  .brand{ display:flex; align-items:center; gap:10px; }
+  .brand-mark{
+    width: 34px; height: 34px; border-radius: 50%;
+    border: 2px solid var(--accent);
+    display:flex; align-items:center; justify-content:center;
+    font-family:"JetBrains Mono", monospace; font-weight:700; font-size:12px;
+    color: var(--accent);
+    flex: none;
+  }
+  .brand-text{ line-height: 1.05; }
+  .brand-text .line1{ font-size: 11px; letter-spacing:0.14em; color: var(--text-muted); font-family:"JetBrains Mono",monospace; }
+  .brand-text .line2{ font-family:"Big Shoulders Display",sans-serif; font-weight:800; font-size: 18px; text-transform:uppercase; }
+
+  nav.tabs{ display:flex; gap: 4px; flex-wrap: wrap; }
+  nav.tabs button{
+    appearance:none; border:1px solid transparent; background:transparent;
+    color: var(--text-muted); padding: 8px 14px; border-radius: 999px;
+    font-size: 13px; font-weight: 600; letter-spacing: 0.03em; text-transform: uppercase;
+    cursor:pointer; transition: all .15s ease;
+  }
+  nav.tabs button:hover{ color: var(--text); border-color: var(--border); }
+  nav.tabs button[aria-selected="true"]{
+    background: var(--accent); color: var(--accent-ink); border-color: var(--accent);
+  }
+  nav.tabs button:focus-visible, .theme-toggle:focus-visible, .card a:focus-visible{
+    outline: 2px solid var(--focus); outline-offset: 2px;
+  }
+
+  .theme-toggle{
+    appearance:none; border:1px solid var(--border); background: var(--surface);
+    color: var(--text); border-radius: 999px; padding: 8px 12px; font-size:12px;
+    cursor:pointer; font-family:"JetBrains Mono",monospace;
+  }
+
+  @media (max-width: 640px){
+    header.topbar{ flex-wrap: wrap; row-gap: 10px; }
+    header.topbar .brand{ order:1; }
+    header.topbar .theme-toggle{ order:2; }
+    nav.tabs{ order:3; width:100%; justify-content:center; }
+  }
+
+  main{ max-width: 1100px; margin: 0 auto; padding: clamp(24px,5vw,56px) clamp(16px,4vw,40px) 140px; }
+  section.page{ display:none; }
+  section.page.active{ display:block; }
+  @media (prefers-reduced-motion: reduce){ *{ scroll-behavior:auto !important; } }
+
+  /* ---------- scroll reveal ---------- */
+  .reveal{ opacity:0; transform: translateY(28px); transition: opacity .7s ease, transform .7s ease; }
+  .reveal.in-view{ opacity:1; transform:none; }
+  @media (prefers-reduced-motion: reduce){
+    .reveal{ transition:none; opacity:1; transform:none; }
+  }
+
+  /* ---------- home ---------- */
+  .hero{ padding: clamp(48px,10vw,120px) 0 clamp(56px,8vw,88px); }
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:8px;
+    font-family:"JetBrains Mono",monospace; font-size:12px; letter-spacing:0.16em;
+    color: var(--accent-2); text-transform:uppercase; margin-bottom: 18px;
+  }
+  .eyebrow::before{ content:"◆"; font-size:10px; }
+  .hero h1{ font-size: clamp(2.8rem, 8vw, 5.6rem); line-height: 0.95; }
+  .hero .accent-word{ color: var(--accent); }
+  .hero p.lede{
+    max-width: 62ch; font-size: 1.15rem; color: var(--text-muted); margin-top: 22px; line-height:1.6;
+  }
+  .hero-actions{ display:flex; gap:12px; margin-top: 30px; flex-wrap: wrap; }
+  .btn{
+    display:inline-flex; align-items:center; gap:8px; padding: 12px 22px; border-radius: 8px;
+    font-weight: 700; font-size: 14px; letter-spacing:0.02em; text-transform:uppercase;
+    text-decoration:none; cursor:pointer; border: 1px solid transparent;
+  }
+  .btn-primary{ background: var(--accent); color: var(--accent-ink); }
+  .btn-ghost{ background: transparent; border-color: var(--border); color: var(--text); }
+
+  .scroll-cue{
+    margin-top: 64px; display:flex; align-items:center; gap:10px;
+    color: var(--text-muted); font-family:"JetBrains Mono",monospace; font-size:11px;
+    letter-spacing: 0.12em; text-transform:uppercase;
+  }
+  .scroll-cue .arrow{ animation: bob 1.8s ease-in-out infinite; }
+  @keyframes bob{ 0%,100%{ transform: translateY(0);} 50%{ transform: translateY(5px);} }
+  @media (prefers-reduced-motion: reduce){ .scroll-cue .arrow{ animation:none; } }
+
+  .telemetry{
+    margin-top: 20px; display:grid; grid-template-columns: repeat(auto-fit,minmax(180px,1fr));
+    border: 1px solid var(--border); border-radius: 12px; overflow:hidden;
+    background: color-mix(in srgb, var(--surface) 92%, transparent); box-shadow: var(--shadow);
+    backdrop-filter: blur(6px);
+  }
+  .telemetry .cell{ padding: 20px 22px; border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .telemetry .cell:last-child{ border-right:none; }
+  .telemetry .k{ font-family:"JetBrains Mono",monospace; font-size:10.5px; letter-spacing:0.12em; color:var(--text-muted); text-transform:uppercase; }
+  .telemetry .v{ font-family:"JetBrains Mono",monospace; font-size:15px; font-weight:600; margin-top:6px; color: var(--text); }
+  .telemetry .v.status{ color: var(--accent-2); }
+
+  .section-head{ margin: 0 0 28px; display:flex; align-items:baseline; gap:16px; }
+  .section-head .num{ font-family:"JetBrains Mono",monospace; color: var(--accent); font-size: 14px; }
+  .section-head h2{ font-size: clamp(1.7rem, 4vw, 2.6rem); }
+  .section-head .rule{ flex:1; height:1px; background: var(--border); }
+
+  .stack{ display:flex; flex-direction:column; gap: 120px; }
+  .stack-tight{ display:flex; flex-direction:column; gap: 28px; }
+
+  .panel{
+    border:1px solid var(--border); background: color-mix(in srgb, var(--surface) 94%, transparent); border-radius: 16px;
+    padding: 32px clamp(24px,4vw,44px); box-shadow: var(--shadow); backdrop-filter: blur(6px);
+  }
+  .panel h3{ font-size: 1.4rem; margin-bottom: 14px; }
+  .panel p{ color: var(--text-muted); line-height:1.7; font-size:1rem; max-width: 68ch; }
+  .panel ul{ margin: 16px 0 0; padding-left: 20px; color: var(--text-muted); line-height:1.8; font-size:0.96rem; }
+  .panel + .panel{ margin-top: 24px; }
+
+  .spec-list{ list-style:none; margin: 24px 0 0; padding:0; display:grid; gap: 12px; max-width: 44ch; }
+  .spec-list li{ display:flex; justify-content:space-between; gap: 16px; padding: 10px 0; border-bottom: 1px dashed var(--border); font-size: 0.92rem; }
+  .spec-list .lbl{ color: var(--text-muted); }
+  .spec-list .val{ font-family:"JetBrains Mono",monospace; text-align:right; }
+
+  .phase-track{ display:grid; grid-template-columns: repeat(4,1fr); gap: 2px; background: var(--border); border-radius: 14px; overflow:hidden; border:1px solid var(--border); }
+  @media (max-width: 700px){ .phase-track{ grid-template-columns: 1fr; } }
+  .phase-track .phase{ background: var(--surface); padding: 22px; }
+  .phase-track .phase.current{ box-shadow: inset 0 3px 0 0 var(--accent); }
+  .phase-track .phase .tag{ font-family:"JetBrains Mono",monospace; font-size:11px; color: var(--accent-2); letter-spacing:0.1em; }
+  .phase-track .phase .tag.current-tag{ color: var(--accent); }
+  .phase-track .phase h4{ font-size: 1.05rem; margin: 8px 0 6px; font-family:"Big Shoulders Display",sans-serif; text-transform:uppercase; font-weight:700; }
+  .phase-track .phase p{ font-size: 0.85rem; color: var(--text-muted); margin:0; line-height:1.5; }
+
+  /* ---------- team & alumni cards ---------- */
+  .card-grid{ display:grid; grid-template-columns: repeat(auto-fill,minmax(220px,1fr)); gap: 20px; }
+  .card{
+    border:1px solid var(--border); background: color-mix(in srgb, var(--surface) 94%, transparent); border-radius: 14px; padding: 22px;
+    box-shadow: var(--shadow); position:relative; backdrop-filter: blur(6px);
+  }
+  .avatar{
+    width: 52px; height:52px; border-radius: 50%; background: var(--surface-2);
+    border: 1px solid var(--border); display:flex; align-items:center; justify-content:center;
+    font-family:"Big Shoulders Display",sans-serif; font-weight:800; color: var(--accent);
+    font-size: 18px; margin-bottom: 14px;
+  }
+  .card h4{ font-size: 1.05rem; font-family:"Big Shoulders Display",sans-serif; text-transform:uppercase; font-weight:700; }
+  .card .role{ font-size: 0.82rem; color: var(--accent-2); font-family:"JetBrains Mono",monospace; margin-top:2px; }
+  .card p.bio{ font-size: 0.86rem; color: var(--text-muted); margin-top: 10px; line-height:1.55; }
+  .card .meta{ margin-top: 12px; display:flex; gap:8px; flex-wrap:wrap; }
+  .pill{ font-family:"JetBrains Mono",monospace; font-size: 10.5px; letter-spacing:0.06em; text-transform:uppercase; background: var(--surface-2); border:1px solid var(--border); border-radius: 999px; padding: 4px 9px; color: var(--text-muted); }
+
+  .edit-note{
+    padding: 18px 20px; border: 1px dashed var(--accent-2);
+    border-radius: 10px; font-size: 0.85rem; color: var(--text-muted); background: color-mix(in srgb, var(--accent-2) 8%, transparent);
+  }
+  .edit-note b{ color: var(--text); }
+
+  footer{
+    border-top: 1px solid var(--border); padding: 32px clamp(16px,4vw,40px) 40px;
+    display:flex; flex-wrap:wrap; gap: 16px; align-items:center; justify-content:space-between;
+    color: var(--text-muted); font-size: 0.85rem;
+    background: color-mix(in srgb, var(--bg) 70%, transparent);
+  }
+  footer .foot-links{ display:flex; gap: 18px; }
+  footer a{ text-decoration:none; color: var(--text-muted); }
+  footer a:hover{ color: var(--accent); }
+</style>
+</head>
+<body>
+
+<div class="site-bg"></div>
+<div class="moon-bg" aria-hidden="true">
+  <div class="moon-glow"></div>
+  <div class="moon-horizon" id="moonHorizon">
+    <svg viewBox="0 0 1440 320" preserveAspectRatio="none">
+      <path d="M0,320 L0,215 Q40,196 80,208 T160,199 Q220,184 260,203 T340,194 Q400,175 460,199 T560,185 Q630,166 690,195 T800,181 Q870,162 930,190 T1040,176 Q1110,157 1180,186 T1300,171 Q1370,157 1440,180 L1440,320 Z" fill="var(--horizon)"/>
+      <ellipse cx="220" cy="207" rx="30" ry="8" fill="none" stroke="var(--horizon-line)" stroke-width="1.5" opacity="0.6"/>
+      <ellipse cx="560" cy="192" rx="42" ry="10" fill="none" stroke="var(--horizon-line)" stroke-width="1.5" opacity="0.6"/>
+      <ellipse cx="980" cy="187" rx="26" ry="7" fill="none" stroke="var(--horizon-line)" stroke-width="1.5" opacity="0.5"/>
+      <ellipse cx="360" cy="197" rx="18" ry="5" fill="none" stroke="var(--horizon-line)" stroke-width="1.2" opacity="0.45"/>
+      <g transform="translate(1150,182)">
+        <line x1="0" y1="0" x2="0" y2="-58" stroke="var(--accent-2)" stroke-width="2"/>
+        <path d="M-17,-58 Q0,-76 17,-58" stroke="var(--accent-2)" stroke-width="2" fill="none"/>
+        <circle cx="0" cy="-58" r="2.5" fill="var(--accent-2)"/>
+        <path d="M10,-70 Q22,-64 18,-52" stroke="var(--text-muted)" stroke-width="1" stroke-dasharray="2 2" fill="none"/>
+      </g>
+    </svg>
+  </div>
+</div>
+<canvas id="starfield"></canvas>
+
+<header class="topbar">
+  <div class="brand">
+    <div class="brand-mark" id="brandMark">HL</div>
+    <div class="brand-text">
+      <div class="line1" id="brandLine1">TCNJ · SCHOOL OF ENGINEERING</div>
+      <div class="line2" id="brandLine2">HuLC Capstone</div>
+    </div>
+  </div>
+  <nav class="tabs" role="tablist" aria-label="Site sections">
+    <button role="tab" aria-selected="true" data-target="home">Home</button>
+    <button role="tab" aria-selected="false" data-target="project">The Project</button>
+    <button role="tab" aria-selected="false" data-target="team">Team</button>
+    <button role="tab" aria-selected="false" data-target="alumni">Alumni</button>
+  </nav>
+  <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle color theme">◐ THEME</button>
+</header>
+
+<main>
+
+  <!-- ============ HOME ============ -->
+  <section class="page active" id="home">
+    <div class="hero" id="heroContent"><!-- filled by JS --></div>
+    <div class="stack" id="homeStack"><!-- filled by JS: telemetry + panels --></div>
+  </section>
+
+  <!-- ============ PROJECT ============ -->
+  <section class="page" id="project">
+    <div class="section-head"><span class="num mono">01</span><h2>The Project</h2><div class="rule"></div></div>
+    <div class="stack" id="projectStack"><!-- filled by JS --></div>
+  </section>
+
+  <!-- ============ TEAM ============ -->
+  <section class="page" id="team">
+    <div class="section-head"><span class="num mono">02</span><h2>The Team</h2><div class="rule"></div></div>
+    <div class="stack-tight reveal" id="teamStack"><!-- filled by JS --></div>
+  </section>
+
+  <!-- ============ ALUMNI ============ -->
+  <section class="page" id="alumni">
+    <div class="section-head"><span class="num mono">03</span><h2>Project Alumni</h2><div class="rule"></div></div>
+    <div class="stack-tight reveal" id="alumniStack"><!-- filled by JS --></div>
+  </section>
+
+</main>
+
+<footer id="siteFooter"><!-- filled by JS --></footer>
+
+<script>
+(function(){
+  var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  fetch('content/site.json').then(function(r){ return r.json(); }).then(render).catch(function(err){
+    console.error('Could not load content/site.json', err);
+  });
+
+  function esc(s){
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function(c){
+      return { '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c];
+    });
+  }
+
+  function render(data){
+    document.title = data.meta.title;
+    var descTag = document.querySelector('meta[name="description"]');
+    if (descTag) descTag.setAttribute('content', data.meta.description);
+
+    document.getElementById('brandMark').textContent = data.brand.mark;
+    document.getElementById('brandLine1').textContent = data.brand.line1;
+    document.getElementById('brandLine2').textContent = data.brand.line2;
+
+    renderHome(data.home);
+    renderProject(data.project);
+    renderTeam(data.team);
+    renderAlumni(data.alumni);
+    renderFooter(data.footer);
+
+    setupTabs();
+    setupTheme();
+    setupReveal();
+    setupParallax();
+    setupStarfield();
+  }
+
+  function renderHome(h){
+    document.getElementById('heroContent').innerHTML =
+      '<div class="eyebrow">' + esc(h.eyebrow) + '</div>' +
+      '<h1>' + esc(h.headline_line1) + '<br>the <span class="accent-word">' + esc(h.headline_accent) + '</span></h1>' +
+      '<p class="lede">' + esc(h.lede) + '</p>' +
+      '<div class="hero-actions">' +
+        '<button class="btn btn-primary" data-target="project">View the project</button>' +
+        '<button class="btn btn-ghost" data-target="team">Meet the team</button>' +
+      '</div>' +
+      '<div class="scroll-cue"><span class="arrow">↓</span> Scroll</div>';
+
+    var cells = h.telemetry.map(function(t){
+      return '<div class="cell"><div class="k">' + esc(t.k) + '</div><div class="v' + (t.status ? ' status' : '') + '">' + esc(t.v) + '</div></div>';
+    }).join('');
+
+    var whyList = h.panel_why_list.map(function(item){ return '<li>' + esc(item) + '</li>'; }).join('');
+
+    document.getElementById('homeStack').innerHTML =
+      '<div class="telemetry mono reveal">' + cells + '</div>' +
+      '<div class="panel reveal"><h3>' + esc(h.panel_hulc_title) + '</h3><p>' + esc(h.panel_hulc_body) + '</p></div>' +
+      '<div class="panel reveal"><h3>' + esc(h.panel_why_title) + '</h3><p>' + esc(h.panel_why_body) + '</p><ul>' + whyList + '</ul></div>';
+  }
+
+  function renderProject(p){
+    var specs = p.spec_list.map(function(s){
+      return '<li><span class="lbl">' + esc(s.lbl) + '</span><span class="val">' + esc(s.val) + '</span></li>';
+    }).join('');
+
+    var phases = p.phases.map(function(ph){
+      return '<div class="phase' + (ph.current ? ' current' : '') + '">' +
+        '<div class="tag' + (ph.current ? ' current-tag' : '') + '">' + esc(ph.tag) + (ph.current ? ' · CURRENT' : '') + '</div>' +
+        '<h4>' + esc(ph.title) + '</h4><p>' + esc(ph.body) + '</p></div>';
+    }).join('');
+
+    document.getElementById('projectStack').innerHTML =
+      '<div class="panel reveal"><h3>' + esc(p.artemis_title) + '</h3><p>' + esc(p.artemis_body) + '</p></div>' +
+      '<div class="panel reveal"><h3>' + esc(p.angle_title) + '</h3>' +
+        '<p>' + esc(p.angle_body_1) + '</p>' +
+        '<p>' + esc(p.angle_body_2) + '</p>' +
+        '<ul class="spec-list">' + specs + '</ul>' +
+      '</div>' +
+      '<div class="phase-track reveal">' + phases + '</div>' +
+      '<div class="edit-note reveal"><b>Edit me:</b> ' + esc(p.edit_note) + '</div>';
+  }
+
+  function memberCard(m, extraPill){
+    return '<div class="card">' +
+      '<div class="avatar">' + esc(m.initials || '') + '</div>' +
+      '<h4>' + esc(m.name) + '</h4>' +
+      '<div class="role">' + esc(m.year) + '</div>' +
+      '<p class="bio">' + esc(m.bio) + '</p>' +
+      (extraPill ? '<div class="meta"><span class="pill">' + esc(extraPill) + '</span></div>' : '') +
+      '</div>';
+  }
+
+  function renderTeam(t){
+    var cards = t.members.map(function(m){ return memberCard(m); }).join('');
+    document.getElementById('teamStack').innerHTML =
+      '<p style="max-width:62ch;color:var(--text-muted);">' + esc(t.note) + '</p>' +
+      '<div class="card-grid">' + cards + '</div>' +
+      '<div class="edit-note">Add your real teammates in the CMS — <span class="mono">Team Page → Team members</span>. Add or remove entries with the list controls; no HTML needed.</div>';
+  }
+
+  function renderAlumni(a){
+    var cards = a.members.map(function(m){ return memberCard(m, m.now ? ('Now at ' + m.now) : null); }).join('');
+    document.getElementById('alumniStack').innerHTML =
+      '<p style="max-width:62ch;color:var(--text-muted);">' + esc(a.intro) + '</p>' +
+      '<div class="card-grid">' + cards + '</div>' +
+      '<div class="edit-note">Add real alumni in the CMS — <span class="mono">Alumni Page → Alumni</span>.</div>';
+  }
+
+  function renderFooter(f){
+    var links = f.links.map(function(l){
+      var external = /^https?:\/\//.test(l.href);
+      return '<a href="' + esc(l.href) + '"' + (external ? ' target="_blank" rel="noopener"' : '') + '>' + esc(l.label) + '</a>';
+    }).join('');
+    document.getElementById('siteFooter').innerHTML =
+      '<div>© <span id="year"></span> ' + esc(f.org) + '</div>' +
+      '<div class="foot-links">' + links + '</div>';
+    document.getElementById('year').textContent = new Date().getFullYear();
+  }
+
+  // ---- tab navigation ----
+  function setupTabs(){
+    var tabs = document.querySelectorAll('nav.tabs button');
+    var pages = document.querySelectorAll('section.page');
+    var actionButtons = document.querySelectorAll('.btn[data-target]');
+
+    function show(target){
+      pages.forEach(function(p){ p.classList.toggle('active', p.id === target); });
+      tabs.forEach(function(t){ t.setAttribute('aria-selected', t.dataset.target === target ? 'true' : 'false'); });
+      window.scrollTo({ top: 0, behavior: reduced ? 'auto' : 'instant' in window ? 'instant' : 'auto' });
+      revealVisible();
+    }
+    tabs.forEach(function(t){ t.addEventListener('click', function(){ show(t.dataset.target); }); });
+    actionButtons.forEach(function(b){ b.addEventListener('click', function(){ show(b.dataset.target); }); });
+  }
+
+  // ---- theme toggle ----
+  function setupTheme(){
+    var root = document.documentElement;
+    var toggle = document.getElementById('themeToggle');
+    try{
+      var saved = localStorage.getItem('hulc-theme');
+      if (saved) root.setAttribute('data-theme', saved);
+    }catch(e){}
+    toggle.addEventListener('click', function(){
+      var current = root.getAttribute('data-theme');
+      var next = current === 'dark' ? 'light' : (current === 'light' ? null : (matchMedia('(prefers-color-scheme: dark)').matches ? 'light' : 'dark'));
+      if (next){ root.setAttribute('data-theme', next); } else { root.removeAttribute('data-theme'); }
+      try{ next ? localStorage.setItem('hulc-theme', next) : localStorage.removeItem('hulc-theme'); }catch(e){}
+    });
+  }
+
+  // ---- scroll reveal ----
+  var observer;
+  function setupReveal(){
+    var targets = document.querySelectorAll('.reveal');
+    if (reduced || !('IntersectionObserver' in window)){
+      targets.forEach(function(el){ el.classList.add('in-view'); });
+      return;
+    }
+    targets.forEach(function(el, i){ el.style.transitionDelay = Math.min(i * 60, 240) + 'ms'; });
+    observer = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if (entry.isIntersecting){ entry.target.classList.add('in-view'); observer.unobserve(entry.target); }
+      });
+    }, { threshold: 0.12 });
+    targets.forEach(function(el){ observer.observe(el); });
+  }
+  function revealVisible(){
+    if (!observer) return;
+    document.querySelectorAll('section.page.active .reveal:not(.in-view)').forEach(function(el){ observer.observe(el); });
+  }
+
+  // ---- parallax horizon ----
+  function setupParallax(){
+    if (reduced) return;
+    var horizon = document.getElementById('moonHorizon');
+    var ticking = false;
+    window.addEventListener('scroll', function(){
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(function(){
+        var y = window.scrollY || 0;
+        horizon.style.transform = 'translateY(' + Math.min(y * 0.05, 40) + 'px)';
+        ticking = false;
+      });
+    }, { passive: true });
+  }
+
+  // ---- starfield ----
+  function setupStarfield(){
+    var canvas = document.getElementById('starfield');
+    var ctx = canvas.getContext('2d');
+    var stars = [];
+    var root = document.documentElement;
+
+    function resize(){
+      canvas.width = window.innerWidth * devicePixelRatio;
+      canvas.height = Math.min(window.innerHeight, 900) * devicePixelRatio;
+      canvas.style.width = window.innerWidth + 'px';
+      canvas.style.height = Math.min(window.innerHeight, 900) + 'px';
+      var count = Math.floor((canvas.width * canvas.height) / 18000);
+      stars = [];
+      for (var i = 0; i < count; i++){
+        stars.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height * 0.75,
+          r: Math.random() * 1.3 + 0.2,
+          a: Math.random() * 0.6 + 0.2,
+          tw: Math.random() * 0.02 + 0.005,
+          dir: Math.random() > 0.5 ? 1 : -1
+        });
+      }
+    }
+
+    function draw(){
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      var isDark = matchMedia('(prefers-color-scheme: dark)').matches;
+      var explicit = root.getAttribute('data-theme');
+      if (explicit === 'light' || (!explicit && !isDark)) return;
+      ctx.fillStyle = '#ffffff';
+      stars.forEach(function(s){
+        if (!reduced){
+          s.a += s.tw * s.dir;
+          if (s.a > 0.9 || s.a < 0.15) s.dir *= -1;
+        }
+        ctx.globalAlpha = s.a;
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+        ctx.fill();
+      });
+      ctx.globalAlpha = 1;
+    }
+
+    function loop(){ draw(); if (!reduced) requestAnimationFrame(loop); }
+    window.addEventListener('resize', resize);
+    resize();
+    if (reduced){ draw(); } else { loop(); }
+  }
+})();
+</script>
+</body>
+</html>
