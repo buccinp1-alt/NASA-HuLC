@@ -94,7 +94,14 @@
   .moon-bg{
     display: var(--moon-display);
     position: fixed; inset: 0; z-index: -3; overflow: hidden; pointer-events: none;
-    background: linear-gradient(180deg, var(--bg) 0%, var(--bg) 60%, color-mix(in srgb, var(--bg) 75%, black) 100%);
+    background: var(--bg);
+  }
+  .moon-photo{
+    position: absolute; inset: 0;
+    background:
+      linear-gradient(180deg, color-mix(in srgb, var(--bg) 35%, transparent) 0%, color-mix(in srgb, var(--bg) 60%, transparent) 55%, var(--bg) 100%),
+      url('https://www.nasa.gov/wp-content/uploads/2023/03/5052744416_353f737db7_o.jpg') center 68% / cover no-repeat;
+    filter: saturate(0.6) brightness(0.85);
   }
   .moon-glow{
     position:absolute; top:-20%; right:-15%; width:70vmax; height:70vmax; border-radius:50%;
@@ -255,6 +262,8 @@
     font-family:"Big Shoulders Display",sans-serif; font-weight:800; color: var(--accent);
     font-size: 18px; margin-bottom: 14px;
   }
+  .avatar-photo{ padding:0; overflow:hidden; }
+  .avatar-photo img{ width:100%; height:100%; object-fit:cover; border-radius:50%; display:block; }
   .card h4{ font-size: 1.05rem; font-family:"Big Shoulders Display",sans-serif; text-transform:uppercase; font-weight:700; }
   .card .role{ font-size: 0.82rem; color: var(--accent-2); font-family:"JetBrains Mono",monospace; margin-top:2px; }
   .card p.bio{ font-size: 0.86rem; color: var(--text-muted); margin-top: 10px; line-height:1.55; }
@@ -282,14 +291,10 @@
 
 <div class="site-bg"></div>
 <div class="moon-bg" aria-hidden="true">
+  <div class="moon-photo"></div>
   <div class="moon-glow"></div>
   <div class="moon-horizon" id="moonHorizon">
     <svg viewBox="0 0 1440 320" preserveAspectRatio="none">
-      <path d="M0,320 L0,215 Q40,196 80,208 T160,199 Q220,184 260,203 T340,194 Q400,175 460,199 T560,185 Q630,166 690,195 T800,181 Q870,162 930,190 T1040,176 Q1110,157 1180,186 T1300,171 Q1370,157 1440,180 L1440,320 Z" fill="var(--horizon)"/>
-      <ellipse cx="220" cy="207" rx="30" ry="8" fill="none" stroke="var(--horizon-line)" stroke-width="1.5" opacity="0.6"/>
-      <ellipse cx="560" cy="192" rx="42" ry="10" fill="none" stroke="var(--horizon-line)" stroke-width="1.5" opacity="0.6"/>
-      <ellipse cx="980" cy="187" rx="26" ry="7" fill="none" stroke="var(--horizon-line)" stroke-width="1.5" opacity="0.5"/>
-      <ellipse cx="360" cy="197" rx="18" ry="5" fill="none" stroke="var(--horizon-line)" stroke-width="1.2" opacity="0.45"/>
       <g transform="translate(1150,182)">
         <line x1="0" y1="0" x2="0" y2="-58" stroke="var(--accent-2)" stroke-width="2"/>
         <path d="M-17,-58 Q0,-76 17,-58" stroke="var(--accent-2)" stroke-width="2" fill="none"/>
@@ -430,8 +435,11 @@
   }
 
   function memberCard(m, extraPill){
+    var avatar = m.photo
+      ? '<div class="avatar avatar-photo"><img src="' + esc(m.photo) + '" alt="' + esc(m.name) + '" loading="lazy"></div>'
+      : '<div class="avatar">' + esc(m.initials || '') + '</div>';
     return '<div class="card">' +
-      '<div class="avatar">' + esc(m.initials || '') + '</div>' +
+      avatar +
       '<h4>' + esc(m.name) + '</h4>' +
       '<div class="role">' + esc(m.year) + '</div>' +
       '<p class="bio">' + esc(m.bio) + '</p>' +
@@ -444,7 +452,7 @@
     document.getElementById('teamStack').innerHTML =
       '<p style="max-width:62ch;color:var(--text-muted);">' + esc(t.note) + '</p>' +
       '<div class="card-grid">' + cards + '</div>' +
-      '<div class="edit-note">Add your real teammates in the CMS — <span class="mono">Team Page → Team members</span>. Add or remove entries with the list controls; no HTML needed.</div>';
+      '<div class="edit-note">Add or update teammates in the CMS — <span class="mono">Team Page → Team members</span>. Add or remove entries with the list controls; no HTML needed.</div>';
   }
 
   function renderAlumni(a){
