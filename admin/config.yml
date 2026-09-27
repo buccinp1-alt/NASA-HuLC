@@ -97,6 +97,7 @@ collections:
                   - { label: "Name", name: "name", widget: "string" }
                   - { label: "Class year", name: "year", widget: "string" }
                   - { label: "One-line bio", name: "bio", widget: "text" }
+                  - { label: "Photo (optional)", name: "photo", widget: "image", required: false }
 
           - label: "Alumni Page"
             name: "alumni"
@@ -111,7 +112,7 @@ collections:
                   - { label: "Name", name: "name", widget: "string" }
                   - { label: "Class year", name: "year", widget: "string" }
                   - { label: "One-line bio", name: "bio", widget: "text" }
-                  - { label: "Now at (company/program)", name: "now", widget: "string" }
+                  - { label: "Photo (optional)", name: "photo", widget: "image", required: false }
 
           - label: "Footer"
             name: "footer"
