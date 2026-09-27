@@ -41,7 +41,7 @@
       { "lbl": "Challenge cycle", "val": "2027 · Comms Equipment" },
       { "lbl": "Candidate A", "val": "Regolith / Dust Mitigation" },
       { "lbl": "Candidate B", "val": "Geometry Redesign" },
-      { "lbl": "Team size", "val": "[Add #]" }
+      { "lbl": "Team size", "val": "6 students" }
     ],
     "phases": [
       { "tag": "PHASE 0", "current": true, "title": "Research", "body": "Reviewing NASA's HuLC archives and our program's past two years of projects to scope the comms-equipment problem." },
@@ -52,12 +52,16 @@
     "edit_note": "Once you commit to a direction, update the candidate cards above to a single answer and move the \"current\" marker to the next phase."
   },
   "team": {
-    "note": "Roles aren't locked in yet — this roster will fill in as the team settles who's doing what.",
+    "note": "Roles and responsibilities from our official NASA HuLC proposal.",
     "members": [
-      { "initials": "YN", "name": "Your Name Here", "year": "Class of 20XX", "bio": "One line on what you're working on — research, CAD, or proposal writing." },
-      { "initials": "TN", "name": "Teammate Name", "year": "Class of 20XX", "bio": "What they're working on." },
-      { "initials": "TN", "name": "Teammate Name", "year": "Class of 20XX", "bio": "What they're working on." },
-      { "initials": "FA", "name": "Faculty Advisor", "year": "Advisor", "bio": "Faculty advisor overseeing the capstone." }
+      { "initials": "AZ", "name": "Ava Zeman", "year": "Team Lead · Thermal Design Co-Lead", "bio": "Keeps the team on track with TCNJ and NASA deadlines, and co-leads thermal management design for the comms hardware.", "photo": "images/uploads/ava-zeman.jpg" },
+      { "initials": "AS", "name": "Athan Stamis", "year": "NASA Liaison · Mechanical Systems Co-Lead", "bio": "Primary point of contact with NASA, and co-leads mechanical systems design for lunar and cislunar survival." },
+      { "initials": "KB", "name": "Kylie Benoit", "year": "Secretary · Thermal Design Co-Lead", "bio": "Documents team meetings and progress, and co-leads thermal design research and analysis." },
+      { "initials": "OM", "name": "Owen Madden", "year": "Project Manager · Predictive Models Co-Lead", "bio": "Runs the technical schedule and milestones, and co-leads SolidWorks/ANSYS predictive modeling." },
+      { "initials": "TJ", "name": "Thomas Jakubicki", "year": "Treasurer · Predictive Models Co-Lead", "bio": "Manages the team budget, and co-leads predictive modeling and FEA analysis for the antenna system." },
+      { "initials": "PB", "name": "Phil Buccino", "year": "Webmaster · Mechanical Systems Co-Lead", "bio": "Builds and maintains this site, and co-leads mechanical systems design for lunar surface survival." },
+      { "initials": "FT", "name": "Dr. Tabrizi", "year": "Faculty Advisor", "bio": "Faculty advisor overseeing the capstone project." },
+      { "initials": "FY", "name": "Dr. Yue", "year": "Faculty Advisor", "bio": "Faculty advisor overseeing the capstone project." }
     ]
   },
   "alumni": {
