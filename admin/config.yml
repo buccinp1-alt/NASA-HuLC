@@ -52,12 +52,6 @@ collections:
                   - { label: "Highlight as status (orange text)", name: "status", widget: "boolean", required: false, default: false }
               - { label: "\"What is HuLC\" panel title", name: "panel_hulc_title", widget: "string" }
               - { label: "\"What is HuLC\" panel body", name: "panel_hulc_body", widget: "text" }
-              - { label: "\"Why it matters\" panel title", name: "panel_why_title", widget: "string" }
-              - { label: "\"Why it matters\" panel body", name: "panel_why_body", widget: "text" }
-              - label: "\"Why it matters\" bullet list"
-                name: "panel_why_list"
-                widget: "list"
-                field: { label: "Item", name: "item", widget: "string" }
 
           - label: "Project Page"
             name: "project"
@@ -82,7 +76,6 @@ collections:
                   - { label: "Is this the current phase?", name: "current", widget: "boolean", default: false }
                   - { label: "Title", name: "title", widget: "string" }
                   - { label: "Body", name: "body", widget: "text" }
-              - { label: "Edit note", name: "edit_note", widget: "text" }
 
           - label: "Team Page"
             name: "team"
