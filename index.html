@@ -99,20 +99,20 @@
   .moon-photo{
     position: absolute; inset: 0;
     background:
-      linear-gradient(180deg, color-mix(in srgb, var(--bg) 35%, transparent) 0%, color-mix(in srgb, var(--bg) 60%, transparent) 55%, var(--bg) 100%),
-      url('https://www.nasa.gov/wp-content/uploads/2023/03/5052744416_353f737db7_o.jpg') center 68% / cover no-repeat;
-    filter: saturate(0.6) brightness(0.85);
+      linear-gradient(180deg, color-mix(in srgb, var(--bg) 45%, transparent) 0%, color-mix(in srgb, var(--bg) 72%, transparent) 55%, var(--bg) 100%),
+      url('https://images-assets.nasa.gov/image/jsc2004e52779/jsc2004e52779~orig.jpg') 80% 55% / cover no-repeat;
+    filter: brightness(0.5) contrast(1.08);
   }
   .moon-glow{
     position:absolute; top:-20%; right:-15%; width:70vmax; height:70vmax; border-radius:50%;
-    background: radial-gradient(circle at 42% 42%, color-mix(in srgb, var(--accent-2) 22%, transparent), transparent 68%);
+    background: radial-gradient(circle at 42% 42%, color-mix(in srgb, var(--accent-2) 14%, transparent), transparent 68%);
   }
   .moon-horizon{
     position:absolute; left:0; right:0; bottom:0; width:100%; height:34vh; min-height:220px;
     will-change: transform;
   }
   .moon-horizon svg{ width:100%; height:100%; display:block; }
-  #starfield{ position: fixed; inset: 0; z-index: -3; opacity: 0.55; }
+  #starfield{ position: fixed; inset: 0; z-index: -3; opacity: 0.32; }
 
   header.topbar{
     position: sticky; top: 0; z-index: 20;
@@ -251,30 +251,28 @@
   .phase-track .phase p{ font-size: 0.85rem; color: var(--text-muted); margin:0; line-height:1.5; }
 
   /* ---------- team & alumni cards ---------- */
-  .card-grid{ display:grid; grid-template-columns: repeat(auto-fill,minmax(220px,1fr)); gap: 20px; }
+  .card-grid{ display:grid; grid-template-columns: repeat(auto-fill,minmax(260px,1fr)); gap: 26px; }
   .card{
-    border:1px solid var(--border); background: color-mix(in srgb, var(--surface) 94%, transparent); border-radius: 14px; padding: 22px;
+    border:1px solid var(--border); background: color-mix(in srgb, var(--surface) 94%, transparent); border-radius: 14px;
     box-shadow: var(--shadow); position:relative; backdrop-filter: blur(6px);
+    padding:0; overflow:hidden; display:flex; flex-direction:column;
   }
-  .avatar{
-    width: 52px; height:52px; border-radius: 50%; background: var(--surface-2);
-    border: 1px solid var(--border); display:flex; align-items:center; justify-content:center;
+  .card-media{
+    width:100%; aspect-ratio: 4 / 5; overflow:hidden;
+    background: var(--surface-2); border-bottom: 1px solid var(--border);
+  }
+  .card-media img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .card-media-fallback{
+    display:flex; align-items:center; justify-content:center;
     font-family:"Big Shoulders Display",sans-serif; font-weight:800; color: var(--accent);
-    font-size: 18px; margin-bottom: 14px;
+    font-size: 64px;
   }
-  .avatar-photo{ padding:0; overflow:hidden; }
-  .avatar-photo img{ width:100%; height:100%; object-fit:cover; border-radius:50%; display:block; }
+  .card-body{ padding: 20px 22px 24px; }
   .card h4{ font-size: 1.05rem; font-family:"Big Shoulders Display",sans-serif; text-transform:uppercase; font-weight:700; }
   .card .role{ font-size: 0.82rem; color: var(--accent-2); font-family:"JetBrains Mono",monospace; margin-top:2px; }
   .card p.bio{ font-size: 0.86rem; color: var(--text-muted); margin-top: 10px; line-height:1.55; }
   .card .meta{ margin-top: 12px; display:flex; gap:8px; flex-wrap:wrap; }
   .pill{ font-family:"JetBrains Mono",monospace; font-size: 10.5px; letter-spacing:0.06em; text-transform:uppercase; background: var(--surface-2); border:1px solid var(--border); border-radius: 999px; padding: 4px 9px; color: var(--text-muted); }
-
-  .edit-note{
-    padding: 18px 20px; border: 1px dashed var(--accent-2);
-    border-radius: 10px; font-size: 0.85rem; color: var(--text-muted); background: color-mix(in srgb, var(--accent-2) 8%, transparent);
-  }
-  .edit-note b{ color: var(--text); }
 
   footer{
     border-top: 1px solid var(--border); padding: 32px clamp(16px,4vw,40px) 40px;
@@ -404,12 +402,9 @@
       return '<div class="cell"><div class="k">' + esc(t.k) + '</div><div class="v' + (t.status ? ' status' : '') + '">' + esc(t.v) + '</div></div>';
     }).join('');
 
-    var whyList = h.panel_why_list.map(function(item){ return '<li>' + esc(item) + '</li>'; }).join('');
-
     document.getElementById('homeStack').innerHTML =
       '<div class="telemetry mono reveal">' + cells + '</div>' +
-      '<div class="panel reveal"><h3>' + esc(h.panel_hulc_title) + '</h3><p>' + esc(h.panel_hulc_body) + '</p></div>' +
-      '<div class="panel reveal"><h3>' + esc(h.panel_why_title) + '</h3><p>' + esc(h.panel_why_body) + '</p><ul>' + whyList + '</ul></div>';
+      '<div class="panel reveal"><h3>' + esc(h.panel_hulc_title) + '</h3><p>' + esc(h.panel_hulc_body) + '</p></div>';
   }
 
   function renderProject(p){
@@ -430,20 +425,21 @@
         '<p>' + esc(p.angle_body_2) + '</p>' +
         '<ul class="spec-list">' + specs + '</ul>' +
       '</div>' +
-      '<div class="phase-track reveal">' + phases + '</div>' +
-      '<div class="edit-note reveal"><b>Edit me:</b> ' + esc(p.edit_note) + '</div>';
+      '<div class="phase-track reveal">' + phases + '</div>';
   }
 
   function memberCard(m, extraPill){
-    var avatar = m.photo
-      ? '<div class="avatar avatar-photo"><img src="' + esc(m.photo) + '" alt="' + esc(m.name) + '" loading="lazy"></div>'
-      : '<div class="avatar">' + esc(m.initials || '') + '</div>';
+    var media = m.photo
+      ? '<div class="card-media"><img src="' + esc(m.photo) + '" alt="' + esc(m.name) + '" loading="lazy"></div>'
+      : '<div class="card-media card-media-fallback">' + esc(m.initials || '') + '</div>';
     return '<div class="card">' +
-      avatar +
+      media +
+      '<div class="card-body">' +
       '<h4>' + esc(m.name) + '</h4>' +
       '<div class="role">' + esc(m.year) + '</div>' +
       '<p class="bio">' + esc(m.bio) + '</p>' +
       (extraPill ? '<div class="meta"><span class="pill">' + esc(extraPill) + '</span></div>' : '') +
+      '</div>' +
       '</div>';
   }
 
@@ -451,16 +447,14 @@
     var cards = t.members.map(function(m){ return memberCard(m); }).join('');
     document.getElementById('teamStack').innerHTML =
       '<p style="max-width:62ch;color:var(--text-muted);">' + esc(t.note) + '</p>' +
-      '<div class="card-grid">' + cards + '</div>' +
-      '<div class="edit-note">Add or update teammates in the CMS — <span class="mono">Team Page → Team members</span>. Add or remove entries with the list controls; no HTML needed.</div>';
+      '<div class="card-grid">' + cards + '</div>';
   }
 
   function renderAlumni(a){
     var cards = a.members.map(function(m){ return memberCard(m, m.now ? ('Now at ' + m.now) : null); }).join('');
     document.getElementById('alumniStack').innerHTML =
       '<p style="max-width:62ch;color:var(--text-muted);">' + esc(a.intro) + '</p>' +
-      '<div class="card-grid">' + cards + '</div>' +
-      '<div class="edit-note">Add real alumni in the CMS — <span class="mono">Alumni Page → Alumni</span>.</div>';
+      '<div class="card-grid">' + cards + '</div>';
   }
 
   function renderFooter(f){
