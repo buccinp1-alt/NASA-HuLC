@@ -1,17 +1,17 @@
 {
   "meta": {
-    "title": "Dust vs. the Signal — TCNJ HuLC",
+    "title": "TCNJ NASA Human Lander Challenge",
     "description": "TCNJ's NASA Human Lander Challenge capstone project: the project, the team, and past alumni."
   },
   "brand": {
     "mark": "HL",
     "line1": "TCNJ · SCHOOL OF ENGINEERING",
-    "line2": "HuLC Capstone"
+    "line2": "Human Lander Challenge"
   },
   "home": {
     "eyebrow": "NASA HuLC · 2027 Cycle · Research Phase",
-    "headline_line1": "Dust vs.",
-    "headline_accent": "signal.",
+    "headline_line1": "TCNJ NASA",
+    "headline_accent": "Human Lander Challenge",
     "lede": "NASA's Human Lander Challenge is asking teams to solve problems in lunar surface communications equipment — a challenge that leans electrical engineering. The College of New Jersey's team is tackling it from a mechanical angle instead. We're in the research phase now, weighing whether the stronger fix is mitigating the lunar dust and regolith that fouls the hardware, or rethinking its geometry outright.",
     "telemetry": [
       { "k": "Competition", "v": "NASA HuLC" },
@@ -47,13 +47,20 @@
     "note": "Roles and responsibilities from our official NASA HuLC proposal.",
     "members": [
       { "initials": "AZ", "name": "Ava Zeman", "year": "Team Lead · Thermal Design Co-Lead", "bio": "Keeps the team on track with TCNJ and NASA deadlines, and co-leads thermal management design for the comms hardware.", "photo": "images/uploads/ava-zeman.jpg" },
-      { "initials": "AS", "name": "Athan Stamis", "year": "NASA Liaison · Mechanical Systems Co-Lead", "bio": "Primary point of contact with NASA, and co-leads mechanical systems design for lunar and cislunar survival." },
-      { "initials": "KB", "name": "Kylie Benoit", "year": "Secretary · Thermal Design Co-Lead", "bio": "Documents team meetings and progress, and co-leads thermal design research and analysis." },
-      { "initials": "OM", "name": "Owen Madden", "year": "Project Manager · Predictive Models Co-Lead", "bio": "Runs the technical schedule and milestones, and co-leads SolidWorks/ANSYS predictive modeling." },
-      { "initials": "TJ", "name": "Thomas Jakubicki", "year": "Treasurer · Predictive Models Co-Lead", "bio": "Manages the team budget, and co-leads predictive modeling and FEA analysis for the antenna system." },
-      { "initials": "PB", "name": "Phil Buccino", "year": "Webmaster · Mechanical Systems Co-Lead", "bio": "Builds and maintains this site, and co-leads mechanical systems design for lunar surface survival." },
-      { "initials": "FT", "name": "Dr. Tabrizi", "year": "Faculty Advisor", "bio": "Faculty advisor overseeing the capstone project." },
-      { "initials": "FY", "name": "Dr. Yue", "year": "Faculty Advisor", "bio": "Faculty advisor overseeing the capstone project." }
+      { "initials": "AS", "name": "Athan Stamis", "year": "NASA Liaison · Mechanical Systems Co-Lead", "bio": "Primary point of contact with NASA, and co-leads mechanical systems design for lunar and cislunar survival.", "photo": "images/uploads/athan-stamis.jpg" },
+      { "initials": "KB", "name": "Kylie Benoit", "year": "Secretary · Thermal Design Co-Lead", "bio": "Documents team meetings and progress, and co-leads thermal design research and analysis.", "photo": "images/uploads/kylie-benoit.jpg" },
+      { "initials": "OM", "name": "Owen Madden", "year": "Project Manager · Predictive Models Co-Lead", "bio": "Runs the technical schedule and milestones, and co-leads SolidWorks/ANSYS predictive modeling.", "photo": "images/uploads/owen-madden.jpg" },
+      { "initials": "TJ", "name": "Thomas Jakubicki", "year": "Treasurer · Predictive Models Co-Lead", "bio": "Manages the team budget, and co-leads predictive modeling and FEA analysis for the antenna system.", "photo": "images/uploads/thomas-jakubicki.jpg" },
+      { "initials": "PB", "name": "Phil Buccino", "year": "Webmaster · Mechanical Systems Co-Lead", "bio": "Builds and maintains this site, and co-leads mechanical systems design for lunar surface survival.", "photo": "images/uploads/phil-buccino.jpg" },
+      { "initials": "FT", "name": "Dr. Tabrizi", "year": "Faculty Advisor", "bio": "Faculty advisor overseeing the capstone project.", "no_photo": true },
+      { "initials": "FY", "name": "Dr. Yue", "year": "Faculty Advisor", "bio": "Faculty advisor overseeing the capstone project.", "no_photo": true }
+    ],
+    "lastyear_note": "The 2025–2026 TCNJ HuLC team, who worked the ECLSS (fluid transfer) challenge.",
+    "lastyear_members": [
+      { "initials": "ZM", "name": "Zackary Miller", "year": "Team Lead · Mechanical Design", "bio": "Kept the team on track for TCNJ's senior project and NASA's competition timelines, and led mechanical design for temperature, pressure, and dust mitigation.", "photo": "images/uploads/zackary-miller.jpg" },
+      { "initials": "ZM2", "name": "Ziad Mahmoud", "year": "Technical Lead · Fluid Analytics", "bio": "Led technical review across the team's design choices, and worked as fluid dynamics analyst studying fluid behavior on the Moon and Mars.", "photo": "images/uploads/ziad-mahmoud.jpg" },
+      { "initials": "AR", "name": "Albert Re", "year": "Treasurer · Thermal Systems", "bio": "Managed the project budget and part orders, and studied heat transfer on the lunar and Martian surface for the thermal design.", "photo": "images/uploads/albert-re.jpg" },
+      { "initials": "AB", "name": "Alexander Borow", "year": "Webmaster · Simulations", "bio": "Maintained the team's website and social media, and ran fluid and thermal simulations for the project design.", "photo": "images/uploads/alexander-borow.jpg" }
     ]
   },
   "alumni": {
