@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "TCNJ NASA Human Lander Challenge",
-    "description": "TCNJ's NASA Human Lander Challenge capstone project: the project, the team, and past alumni."
+    "description": "TCNJ's NASA Human Lander Challenge capstone project: the project and the team, past and present."
   },
   "brand": {
     "mark": "HL",
@@ -9,38 +9,38 @@
     "line2": "Human Lander Challenge"
   },
   "home": {
-    "eyebrow": "NASA HuLC · 2027 Cycle · Research Phase",
+    "eyebrow": "NASA HuLC · 2027 Cycle · Design Phase",
     "headline_line1": "TCNJ NASA",
     "headline_accent": "Human Lander Challenge",
-    "lede": "NASA's Human Lander Challenge is asking teams to solve problems in lunar surface communications equipment — a challenge that leans electrical engineering. The College of New Jersey's team is tackling it from a mechanical angle instead. We're in the research phase now, weighing whether the stronger fix is mitigating the lunar dust and regolith that fouls the hardware, or rethinking its geometry outright.",
+    "lede": "NASA's Human Lander Challenge is asking teams to solve problems in lunar surface communications equipment, a challenge that leans electrical engineering. The College of New Jersey's team is tackling it from a mechanical angle instead. We're designing a dust-tolerant connector for the base of a lunar antenna: the mechanical joint where regolith works its way in, jams the hardware, and takes the signal with it.",
     "telemetry": [
       { "k": "Competition", "v": "NASA HuLC" },
       { "k": "Hosted by", "v": "NASA · NIA" },
       { "k": "Challenge focus", "v": "Lunar Comms Equipment" },
       { "k": "Season", "v": "2027 Cycle" },
-      { "k": "Status", "v": "Research / Problem Scoping", "status": true }
+      { "k": "Status", "v": "Design Research", "status": true }
     ],
     "panel_hulc_title": "What is HuLC?",
-    "panel_hulc_body": "NASA's Human Lander Challenge is a national university design competition run with the National Institute of Aerospace, aimed at the technology NASA needs for its Artemis campaign to return humans to the Moon. Each year NASA opens a new focus area for teams to design against — this cycle (labeled \"2027\") centers on lunar surface communications equipment. Teams submit proposals, then present forward-phase designs to NASA reviewers."
+    "panel_hulc_body": "NASA's Human Lander Challenge is a national university design competition run with the National Institute of Aerospace, aimed at the technology NASA needs for its Artemis campaign to return humans to the Moon. Each year NASA opens a new focus area for teams to design against. This cycle (labeled \"2027\") centers on lunar surface communications equipment. Teams submit proposals, then present forward-phase designs to NASA reviewers."
   },
   "project": {
     "artemis_title": "The Artemis campaign",
-    "artemis_body": "NASA's Artemis campaign is the agency's push to return astronauts to the Moon and build a sustainable presence there ahead of eventual Mars missions. Artemis II carried a crew around the Moon and back in 2026 — the first crewed lunar flight in over fifty years — and NASA is now moving hardware into place for Artemis III, which is planned to put astronauts back on the lunar surface. HuLC exists to pull outside engineering talent, like ours, onto the hardware problems that campaign still needs solved.",
-    "angle_title": "Research phase: choosing our angle",
-    "angle_body_1": "This year's HuLC theme (the \"2027\" cycle) centers on lunar surface communications equipment — an area that leans electrical engineering. Our team is approaching it from a mechanical lens instead, and right now we're still in the research phase: reviewing NASA's technical archives and our own program's past HuLC projects before committing to a direction.",
-    "angle_body_2": "Two candidate directions are on the table: mitigating the lunar regolith and dust that fouls comms hardware over time, or redesigning the equipment's geometry itself — its housing, mounts, or structure — so it holds up on the surface without relying on electronics to do the work.",
+    "artemis_body": "NASA's Artemis campaign is the agency's push to return astronauts to the Moon and build a sustainable presence there ahead of eventual Mars missions. Artemis II carried a crew around the Moon and back in April 2026, the first crewed lunar flight in over fifty years. Artemis III follows in 2027 as an orbital checkout flight, with the first crewed landing now planned for Artemis IV in 2028.",
+    "angle_title": "Our approach: a dust-tolerant connector",
+    "angle_body_1": "This year's HuLC theme (the \"2027\" cycle) centers on lunar surface communications equipment, an area that leans electrical engineering. Our team is approaching it from a mechanical lens instead, and we've narrowed our focus to the connector at the base of a lunar antenna.",
+    "angle_body_2": "Lunar regolith is sharp and electrostatically charged. It works into the clearances of mechanical joints, raises friction, and eventually jams them, a failure mode documented repeatedly across the Apollo missions, where lubricating the mechanisms between EVAs wasn't enough to keep them moving. NASA currently lists dust-tolerant rotary joints as an open technology gap. Our connector is designed to seal against that intrusion while still allowing a few degrees of rotation for fine pointing adjustment, since a directional antenna only delivers its gain if it stays aimed. Focusing on one component, rather than redesigning an entire antenna system, also gives us something we can realistically simulate, manufacture, and test with the vacuum chamber and other resources available at TCNJ.",
     "spec_list": [
       { "lbl": "Discipline", "val": "Mechanical Engineering" },
       { "lbl": "Challenge cycle", "val": "2027 · Comms Equipment" },
-      { "lbl": "Candidate A", "val": "Regolith / Dust Mitigation" },
-      { "lbl": "Candidate B", "val": "Geometry Redesign" },
+      { "lbl": "Focus", "val": "Antenna Base Connector" },
+      { "lbl": "Approach", "val": "Dust Sealing + Fine Rotation" },
       { "lbl": "Team size", "val": "6 students" }
     ],
     "phases": [
-      { "tag": "PHASE 0", "current": true, "title": "Research", "body": "Reviewing NASA's HuLC archives and our program's past two years of projects to scope the comms-equipment problem." },
-      { "tag": "PHASE 1", "current": false, "title": "Problem Selection", "body": "Narrowing between dust/regolith mitigation and a geometry-based redesign." },
-      { "tag": "PHASE 2", "current": false, "title": "Forward Review", "body": "Proposal and design package submitted for NASA / NIA review. [Update status]" },
-      { "tag": "PHASE 3", "current": false, "title": "Final Presentation", "body": "[Add details once scheduled — final forum, demo, or report date]" }
+      { "tag": "PHASE 0", "current": false, "title": "Scoping", "body": "Reviewed NASA's HuLC archives, the lunar dust mitigation literature, and our program's past two years of projects to scope the problem." },
+      { "tag": "PHASE 1", "current": true, "title": "Design Research", "body": "Building the connector design from the ground up: contact physics, space-rated connector standards, and NASA's dust-tolerant mechanism work." },
+      { "tag": "PHASE 2", "current": false, "title": "Proposal", "body": "Proposal package and concept video submitted to NASA / NIA. Due March 4, 2027." },
+      { "tag": "PHASE 3", "current": false, "title": "HuLC Forum", "body": "Finalist teams present to NASA reviewers in Huntsville, Alabama. June 21–24, 2027." }
     ]
   },
   "team": {
@@ -61,14 +61,6 @@
       { "initials": "ZM2", "name": "Ziad Mahmoud", "year": "Technical Lead · Fluid Analytics", "bio": "Led technical review across the team's design choices, and worked as fluid dynamics analyst studying fluid behavior on the Moon and Mars.", "photo": "images/uploads/ziad-mahmoud.jpg" },
       { "initials": "AR", "name": "Albert Re", "year": "Treasurer · Thermal Systems", "bio": "Managed the project budget and part orders, and studied heat transfer on the lunar and Martian surface for the thermal design.", "photo": "images/uploads/albert-re.jpg" },
       { "initials": "AB", "name": "Alexander Borow", "year": "Webmaster · Simulations", "bio": "Maintained the team's website and social media, and ran fluid and thermal simulations for the project design.", "photo": "images/uploads/alexander-borow.jpg" }
-    ]
-  },
-  "alumni": {
-    "intro": "TCNJ students who worked on this project in previous years — the research and designs this season's team builds on.",
-    "members": [
-      { "initials": "AL", "name": "Alum Name", "year": "Class of 20XX", "bio": "Their role on the project, and where they are now — grad school, industry, etc.", "now": "[Company/Program]" },
-      { "initials": "AL", "name": "Alum Name", "year": "Class of 20XX", "bio": "Their role on the project, and where they are now.", "now": "[Company/Program]" },
-      { "initials": "AL", "name": "Alum Name", "year": "Class of 20XX", "bio": "Their role on the project, and where they are now.", "now": "[Company/Program]" }
     ]
   },
   "footer": {
