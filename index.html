@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>TCNJ NASA Human Lander Challenge</title>
-<meta name="description" content="TCNJ's NASA Human Lander Challenge capstone project: the project, the team, and past alumni.">
+<meta name="description" content="TCNJ's NASA Human Lander Challenge capstone project: the project and the team, past and present.">
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800;900&family=Public+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
@@ -304,7 +304,6 @@
     <button role="tab" aria-selected="true" data-target="home">Home</button>
     <button role="tab" aria-selected="false" data-target="project">The Project</button>
     <button role="tab" aria-selected="false" data-target="team">Team</button>
-    <button role="tab" aria-selected="false" data-target="alumni">Alumni</button>
   </nav>
   <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle color theme">◐ THEME</button>
 </header>
@@ -328,15 +327,9 @@
     <div class="section-head"><span class="num mono">02</span><h2>The Team</h2><div class="rule"></div></div>
     <nav class="year-switch" role="tablist" aria-label="Team year" id="teamYearTabs">
       <button role="tab" aria-selected="true" data-year="current">2026–2027 Team</button>
-      <button role="tab" aria-selected="false" data-year="lastyear">2025–2026 Team</button>
+      <button role="tab" aria-selected="false" data-year="lastyear">Alumni · 2025–2026 Team</button>
     </nav>
     <div class="stack-tight reveal" id="teamStack"><!-- filled by JS --></div>
-  </section>
-
-  <!-- ============ ALUMNI ============ -->
-  <section class="page" id="alumni">
-    <div class="section-head"><span class="num mono">03</span><h2>Project Alumni</h2><div class="rule"></div></div>
-    <div class="stack-tight reveal" id="alumniStack"><!-- filled by JS --></div>
   </section>
 
 </main>
@@ -369,7 +362,6 @@
     renderHome(data.home);
     renderProject(data.project);
     renderTeam(data.team);
-    renderAlumni(data.alumni);
     renderFooter(data.footer);
 
     setupTabs();
@@ -456,13 +448,6 @@
     var cards = members.map(function(m){ return memberCard(m); }).join('');
     document.getElementById('teamStack').innerHTML =
       '<p style="max-width:62ch;color:var(--text-muted);">' + esc(note) + '</p>' +
-      '<div class="card-grid">' + cards + '</div>';
-  }
-
-  function renderAlumni(a){
-    var cards = a.members.map(function(m){ return memberCard(m, m.now ? ('Now at ' + m.now) : null); }).join('');
-    document.getElementById('alumniStack').innerHTML =
-      '<p style="max-width:62ch;color:var(--text-muted);">' + esc(a.intro) + '</p>' +
       '<div class="card-grid">' + cards + '</div>';
   }
 
