@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dust vs. the Signal — TCNJ HuLC</title>
+<title>TCNJ NASA Human Lander Challenge</title>
 <meta name="description" content="TCNJ's NASA Human Lander Challenge capstone project: the project, the team, and past alumni.">
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800;900&family=Public+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap');
@@ -100,15 +100,9 @@
     position: absolute; inset: 0;
     background:
       linear-gradient(180deg, color-mix(in srgb, var(--bg) 28%, transparent) 0%, color-mix(in srgb, var(--bg) 50%, transparent) 55%, var(--bg) 92%),
-      url('https://images-assets.nasa.gov/image/jsc2004e52779/jsc2004e52779~orig.jpg') 80% 55% / cover no-repeat;
+      url('images/site/apollo17-station6.jpg') 80% 55% / cover no-repeat;
     filter: brightness(0.85) contrast(1.05);
   }
-  .moon-horizon{
-    position:absolute; left:0; right:0; bottom:0; width:100%; height:34vh; min-height:220px;
-    will-change: transform;
-  }
-  .moon-horizon svg{ width:100%; height:100%; display:block; }
-
   header.topbar{
     position: sticky; top: 0; z-index: 20;
     display: flex; align-items: center; justify-content: space-between;
@@ -158,6 +152,17 @@
     header.topbar .theme-toggle{ order:2; }
     nav.tabs{ order:3; width:100%; justify-content:center; }
   }
+
+  .year-switch{ display:flex; gap:4px; flex-wrap:wrap; margin: 2px 0 26px; }
+  .year-switch button{
+    appearance:none; background:transparent; color: var(--text-muted);
+    padding: 7px 14px; border-radius: 999px; border:1px solid var(--border);
+    font-size: 12px; font-weight: 600; letter-spacing: 0.03em; text-transform: uppercase;
+    cursor:pointer; transition: all .15s ease;
+  }
+  .year-switch button:hover{ color: var(--text); }
+  .year-switch button[aria-selected="true"]{ background: var(--accent-2); border-color: var(--accent-2); color: var(--accent-ink); }
+  .year-switch button:focus-visible{ outline: 2px solid var(--focus); outline-offset: 2px; }
 
   main{ max-width: 1100px; margin: 0 auto; padding: clamp(24px,5vw,56px) clamp(16px,4vw,40px) 140px; }
   section.page{ display:none; }
@@ -285,16 +290,6 @@
 <div class="site-bg"></div>
 <div class="moon-bg" aria-hidden="true">
   <div class="moon-photo"></div>
-  <div class="moon-horizon" id="moonHorizon">
-    <svg viewBox="0 0 1440 320" preserveAspectRatio="none">
-      <g transform="translate(1150,182)">
-        <line x1="0" y1="0" x2="0" y2="-58" stroke="var(--accent-2)" stroke-width="2"/>
-        <path d="M-17,-58 Q0,-76 17,-58" stroke="var(--accent-2)" stroke-width="2" fill="none"/>
-        <circle cx="0" cy="-58" r="2.5" fill="var(--accent-2)"/>
-        <path d="M10,-70 Q22,-64 18,-52" stroke="var(--text-muted)" stroke-width="1" stroke-dasharray="2 2" fill="none"/>
-      </g>
-    </svg>
-  </div>
 </div>
 
 <header class="topbar">
@@ -331,6 +326,10 @@
   <!-- ============ TEAM ============ -->
   <section class="page" id="team">
     <div class="section-head"><span class="num mono">02</span><h2>The Team</h2><div class="rule"></div></div>
+    <nav class="year-switch" role="tablist" aria-label="Team year" id="teamYearTabs">
+      <button role="tab" aria-selected="true" data-year="current">2026–2027 Team</button>
+      <button role="tab" aria-selected="false" data-year="lastyear">2025–2026 Team</button>
+    </nav>
     <div class="stack-tight reveal" id="teamStack"><!-- filled by JS --></div>
   </section>
 
@@ -376,13 +375,12 @@
     setupTabs();
     setupTheme();
     setupReveal();
-    setupParallax();
   }
 
   function renderHome(h){
     document.getElementById('heroContent').innerHTML =
       '<div class="eyebrow">' + esc(h.eyebrow) + '</div>' +
-      '<h1>' + esc(h.headline_line1) + '<br>the <span class="accent-word">' + esc(h.headline_accent) + '</span></h1>' +
+      '<h1>' + esc(h.headline_line1) + '<br><span class="accent-word">' + esc(h.headline_accent) + '</span></h1>' +
       '<p class="lede">' + esc(h.lede) + '</p>' +
       '<div class="hero-actions">' +
         '<button class="btn btn-primary" data-target="project">View the project</button>' +
@@ -421,9 +419,12 @@
   }
 
   function memberCard(m, extraPill){
-    var media = m.photo
-      ? '<div class="card-media"><img src="' + esc(m.photo) + '" alt="' + esc(m.name) + '" loading="lazy"></div>'
-      : '<div class="card-media card-media-fallback">' + esc(m.initials || '') + '</div>';
+    var media = '';
+    if (!m.no_photo) {
+      media = m.photo
+        ? '<div class="card-media"><img src="' + esc(m.photo) + '" alt="' + esc(m.name) + '" loading="lazy"></div>'
+        : '<div class="card-media card-media-fallback">' + esc(m.initials || '') + '</div>';
+    }
     return '<div class="card">' +
       media +
       '<div class="card-body">' +
@@ -435,10 +436,26 @@
       '</div>';
   }
 
+  var teamData = null;
   function renderTeam(t){
-    var cards = t.members.map(function(m){ return memberCard(m); }).join('');
+    teamData = t;
+    renderTeamYear('current');
+    var yearBtns = document.querySelectorAll('#teamYearTabs button');
+    yearBtns.forEach(function(btn){
+      btn.addEventListener('click', function(){
+        yearBtns.forEach(function(b){ b.setAttribute('aria-selected', b === btn ? 'true' : 'false'); });
+        renderTeamYear(btn.dataset.year);
+      });
+    });
+  }
+
+  function renderTeamYear(yr){
+    var isLast = yr === 'lastyear';
+    var note = isLast ? (teamData.lastyear_note || '') : teamData.note;
+    var members = isLast ? (teamData.lastyear_members || []) : teamData.members;
+    var cards = members.map(function(m){ return memberCard(m); }).join('');
     document.getElementById('teamStack').innerHTML =
-      '<p style="max-width:62ch;color:var(--text-muted);">' + esc(t.note) + '</p>' +
+      '<p style="max-width:62ch;color:var(--text-muted);">' + esc(note) + '</p>' +
       '<div class="card-grid">' + cards + '</div>';
   }
 
@@ -478,17 +495,18 @@
 
   // ---- theme toggle ----
   function setupTheme(){
+    // Default to the dark/space theme regardless of the visitor's system preference,
+    // since the background photo and accent palette are designed for it — it only
+    // switches to light if the visitor explicitly toggles it (remembered via localStorage).
     var root = document.documentElement;
     var toggle = document.getElementById('themeToggle');
-    try{
-      var saved = localStorage.getItem('hulc-theme');
-      if (saved) root.setAttribute('data-theme', saved);
-    }catch(e){}
+    var saved = null;
+    try{ saved = localStorage.getItem('hulc-theme'); }catch(e){}
+    root.setAttribute('data-theme', saved === 'light' ? 'light' : 'dark');
     toggle.addEventListener('click', function(){
-      var current = root.getAttribute('data-theme');
-      var next = current === 'dark' ? 'light' : (current === 'light' ? null : (matchMedia('(prefers-color-scheme: dark)').matches ? 'light' : 'dark'));
-      if (next){ root.setAttribute('data-theme', next); } else { root.removeAttribute('data-theme'); }
-      try{ next ? localStorage.setItem('hulc-theme', next) : localStorage.removeItem('hulc-theme'); }catch(e){}
+      var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      try{ localStorage.setItem('hulc-theme', next); }catch(e){}
     });
   }
 
@@ -513,21 +531,6 @@
     document.querySelectorAll('section.page.active .reveal:not(.in-view)').forEach(function(el){ observer.observe(el); });
   }
 
-  // ---- parallax horizon ----
-  function setupParallax(){
-    if (reduced) return;
-    var horizon = document.getElementById('moonHorizon');
-    var ticking = false;
-    window.addEventListener('scroll', function(){
-      if (ticking) return;
-      ticking = true;
-      requestAnimationFrame(function(){
-        var y = window.scrollY || 0;
-        horizon.style.transform = 'translateY(' + Math.min(y * 0.05, 40) + 'px)';
-        ticking = false;
-      });
-    }, { passive: true });
-  }
 })();
 </script>
 </body>
