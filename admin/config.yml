@@ -82,7 +82,7 @@ collections:
             widget: "object"
             fields:
               - { label: "Note above the roster", name: "note", widget: "text" }
-              - label: "Team members"
+              - label: "Team members (this year, 2026–2027)"
                 name: "members"
                 widget: "list"
                 fields:
@@ -91,6 +91,19 @@ collections:
                   - { label: "Class year", name: "year", widget: "string" }
                   - { label: "One-line bio", name: "bio", widget: "text" }
                   - { label: "Photo (optional)", name: "photo", widget: "image", required: false }
+                  - { label: "Hide photo block (for advisors who don't want a photo shown)", name: "no_photo", widget: "boolean", required: false, default: false }
+              - { label: "Note above last year's roster", name: "lastyear_note", widget: "text", required: false }
+              - label: "Last year's team (2025–2026)"
+                name: "lastyear_members"
+                widget: "list"
+                required: false
+                fields:
+                  - { label: "Initials (for the avatar circle)", name: "initials", widget: "string" }
+                  - { label: "Name", name: "name", widget: "string" }
+                  - { label: "Class year", name: "year", widget: "string" }
+                  - { label: "One-line bio", name: "bio", widget: "text" }
+                  - { label: "Photo (optional)", name: "photo", widget: "image", required: false }
+                  - { label: "Hide photo block (for advisors who don't want a photo shown)", name: "no_photo", widget: "boolean", required: false, default: false }
 
           - label: "Alumni Page"
             name: "alumni"
@@ -106,6 +119,7 @@ collections:
                   - { label: "Class year", name: "year", widget: "string" }
                   - { label: "One-line bio", name: "bio", widget: "text" }
                   - { label: "Photo (optional)", name: "photo", widget: "image", required: false }
+                  - { label: "Hide photo block", name: "no_photo", widget: "boolean", required: false, default: false }
 
           - label: "Footer"
             name: "footer"
